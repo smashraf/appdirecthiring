@@ -1,0 +1,6 @@
+rootProject.name = 'AppDirect'
+include 'appdirect-web'
+include 'appdirect-service'
+include 'appdirect-config'
+include 'appdirect-domain'
+

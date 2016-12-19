@@ -1,0 +1,13 @@
+group 'AppdirectTest'
+version '0.0.0'
+
+apply plugin: 'java'
+
+
+
+
+dependencies {
+    compile project (':appdirect-config')
+    compile project (':appdirect-domain')
+
+}
