@@ -18,7 +18,6 @@ import spock.lang.Stepwise
 
 @ContextConfiguration(loader = SpringApplicationContextLoader.class, classes
 = [Application.class])@WebAppConfiguration
-@IntegrationTest("server.port:8000")
 //@RunWith(SpringRunner.class)
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Stepwise
