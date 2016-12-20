@@ -7,9 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * Created by covacsis on 19/12/16.
- */
 @Component
 public class UserAccountServiceImpl implements  UserAccountService {
     @Autowired
@@ -29,11 +26,6 @@ public class UserAccountServiceImpl implements  UserAccountService {
         return userAccountRepository.save(account);
     }
 
-    @Override
-    public void deleteAccount(String accountId) {
-        UserAccount account = getAccountById(accountId);
-        userAccountRepository.delete(account);
-    }
 
     @Override
     public List<UserAccount> getAllAccount() {

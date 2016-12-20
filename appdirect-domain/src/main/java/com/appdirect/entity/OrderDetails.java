@@ -12,7 +12,7 @@ public class OrderDetails implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 455667781239L;
+	private static final long serialVersionUID = 2543678914567542459L;
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(generator = "uuid")

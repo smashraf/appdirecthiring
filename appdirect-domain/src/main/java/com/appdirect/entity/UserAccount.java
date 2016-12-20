@@ -14,8 +14,8 @@ public class UserAccount implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2252589112488544377L;
-	
+	private static final long serialVersionUID = 2543678914567143256L;
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(generator = "uuid")
@@ -34,11 +34,7 @@ public class UserAccount implements Serializable{
 
 
 
-	/**
-	 * Ignore this column: added for testing
-	 */
-	private String testIdentifier;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "account", orphanRemoval = true, cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
 	private List<AppdirectUser> appdirectUser;
@@ -58,7 +54,6 @@ public class UserAccount implements Serializable{
 		this.appDirectBaseUrl = appDirectBaseUrl;
 		this.isActive = isActive;
 		this.status = status;
-		this.testIdentifier = testIdentifier;
 		this.appdirectUser = appdirectUsers;
 		this.order = order;
 	}
@@ -103,13 +98,6 @@ public class UserAccount implements Serializable{
 		this.status = status;
 	}
 
-	public String getTestIdentifier() {
-		return testIdentifier;
-	}
-
-	public void setTestIdentifier(String testIdentifier) {
-		this.testIdentifier = testIdentifier;
-	}
 
 	public List<AppdirectUser> getAppdirectUser() {
 		return appdirectUser;

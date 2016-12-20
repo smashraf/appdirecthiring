@@ -7,30 +7,25 @@ import com.appdirect.appdirectobjects.type.ErrorCode;
 import com.appdirect.entity.OrderDetails;
 import com.appdirect.entity.SubscriptionDetail;
 import com.appdirect.entity.UserAccount;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component("ChangeSubscription")
 public class ChangeSubscription implements EventHandler {
 
-	private static final Logger logger = LogManager.getLogger(ChangeSubscription.class);
+	private static final Logger logger = LoggerFactory.getLogger(ChangeSubscription.class);
 
 	@Autowired
 	private UserAccountService userAccountService;
-//
 
-	/**
-	 * Handle subscription change event
-	 */
+
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public AppdirectAPIResponse handleEvent(EventInfo eventInfo) {
@@ -41,6 +36,7 @@ public class ChangeSubscription implements EventHandler {
 		UserAccount account = userAccountService.getAccountById(accountId);
 
 		if (null == account) {
+			logger.debug("Account does not exists for account ID: " + accountId);
 			return new AppdirectAPIResponse(false, "Account does not exists for account ID: " + accountId, ErrorCode.ACCOUNT_NOT_FOUND);
 		}
 

@@ -13,7 +13,7 @@ public class SubscriptionDetail implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 125610036507537001L;
+	private static final long serialVersionUID = 2543678914567547893L;
 
 	@Id
 	@Column(name = "id")

@@ -2,6 +2,9 @@ package com.appdirect.controller;
 
 import com.appdirect.config.ClientSecret;
 import com.appdirect.service.Testservice;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.http.MediaType;
@@ -13,11 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Created by covacsis on 16/12/16.
+ * testing Spring Boot
  */
 @Controller
 @RequestMapping("/api/v1")
 public class HelloController {
+    private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
     @Autowired
     private ClientSecret clientSecret;
     @Autowired
@@ -25,6 +29,7 @@ public class HelloController {
     @RequestMapping(value="/hello",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String greeting() {
+        logger.info("hey man it works");
         System.out.println("hey man it works");
         clientSecret.getConsumerKey();
         testservice.testservice(5);

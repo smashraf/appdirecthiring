@@ -9,9 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * Created by covacsis on 18/12/16.
- */
 @Component
 public class StudentServiceImpl implements StudentService {
     @Autowired

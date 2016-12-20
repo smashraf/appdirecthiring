@@ -1,7 +1,7 @@
 package com.appdirect.representation;
 
 /**
- * Created by covacsis on 18/12/16.
+ * Student Representation For Exposed API.
  */
 public class StudentRepresentation {
     private int id;

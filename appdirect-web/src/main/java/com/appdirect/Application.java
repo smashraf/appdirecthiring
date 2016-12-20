@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 
 /**
- * Created by covacsis on 15/12/16.
+ * Spring Boot Entry Point
  */
 @SpringBootApplication
 public class Application {

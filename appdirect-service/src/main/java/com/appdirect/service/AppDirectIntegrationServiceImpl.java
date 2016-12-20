@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by covacsis on 18/12/16.
- */
+
 @Component
 public class AppDirectIntegrationServiceImpl implements AppDirectIntegrationService{
    @Autowired
@@ -28,8 +26,6 @@ public class AppDirectIntegrationServiceImpl implements AppDirectIntegrationServ
 
     @Override
     public AppdirectAPIResponse handleEvent(EventInfo event) {
-        System.out.println(event);
-        System.out.println("APIN HIT SERVICE");
         switch (event.getType()) {
             case SUBSCRIPTION_ORDER:
                 return createSubscription.handleEvent(event);

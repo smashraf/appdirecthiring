@@ -1,7 +1,7 @@
 package com.appdirect.config;
 
 /**
- * Created by covacsis on 16/12/16.
+ * Prodcut Oauth Secret And key.
  */
 public class ClientSecret {
     private String consumerKey;

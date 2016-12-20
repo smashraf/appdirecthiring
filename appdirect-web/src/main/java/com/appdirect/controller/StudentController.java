@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * Created by covacsis on 18/12/16.
+ * Sample Student Controller
  */
 @Controller
 @RequestMapping("/api/v1")

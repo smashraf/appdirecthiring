@@ -6,9 +6,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
-/**
- * Created by covacsis on 16/12/16.
- */
 @Configuration
 public class PropertyConfig {
     static @Bean

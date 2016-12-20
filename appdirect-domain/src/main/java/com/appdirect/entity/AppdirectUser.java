@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Table(name = "appdirect_user")
 public class AppdirectUser implements Serializable{
 
-	private static final long serialVersionUID = -223233452969421227L;
+	private static final long serialVersionUID = -2543678914567542378L;
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")

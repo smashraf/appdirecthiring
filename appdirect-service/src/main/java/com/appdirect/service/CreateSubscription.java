@@ -8,6 +8,8 @@ import com.appdirect.entity.AppdirectUser;
 import com.appdirect.entity.OrderDetails;
 import com.appdirect.entity.SubscriptionDetail;
 import com.appdirect.entity.UserAccount;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,11 +17,9 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by covacsis on 19/12/16.
- */
 @Component("CreateSubscription")
 public class CreateSubscription implements EventHandler {
+    private static final Logger logger = LoggerFactory.getLogger(CreateSubscription.class);
     @Autowired
     private UserAccountService userAccountService;
     @Override
@@ -28,6 +28,7 @@ public class CreateSubscription implements EventHandler {
         userAccount.setAccountIdentifier(eventInfo.getPayload().getCompany().getUuid());
         UserAccount existingAccount = userAccountService.getAccountById(eventInfo.getPayload().getCompany().getUuid());
         if (null!=existingAccount) {
+            logger.debug("Account exists with Id: " + existingAccount.getId());
             return new AppdirectAPIResponse(false,
                     "Account already exists for account ID: " + eventInfo.getPayload().getCompany().getUuid(),
                     ErrorCode.OPERATION_CANCELLED);
@@ -52,9 +53,6 @@ public class CreateSubscription implements EventHandler {
         adminUser.setUuid(eventInfo.getCreator().getUuid());
         subscription.setEditionCode(eventInfo.getPayload().getOrder().getEditionCode());
         subscription.setPricingDuration(eventInfo.getPayload().getOrder().getPricingDuration().name());
-//            BeanUtils.copyProperties(adminUser, eventInfo.getCreator());
-//            adminUser.setUuid(eventInfo.getCreator());
-//            BeanUtils.copyProperties(subscription, eventInfo.getPayload().getOrder());
 
             for (OrderItem item : eventInfo.getPayload().getOrder().getItems()) {
                 OrderDetails orderItemTosave = new OrderDetails();
