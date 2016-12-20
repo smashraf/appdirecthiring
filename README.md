@@ -24,7 +24,7 @@
       < li>Once jar is copied login toh the cloud and stop the current runnig jar</li>
       <li>Run the coppied jar:</li>
     <ol>Steps are:
-      <li>nohup java -Dspring.datasource.username=<?> -Dspring.datasource.password=<?> -Dlogging.file=<?> -Dconsumer.key=<?> -D<?> -jar appdirect-web-1.0-SNAPSHOT.jar &</li>
+      <li>nohup java -Dspring.datasource.username=<?> -Dspring.datasource.password=<?> -Dlogging.file=<?> -Dconsumer.key=<?> -Dconsumer.secret=<?> -jar appdirect-web-1.0-SNAPSHOT.jar &</li>
         <ol>Importat properties for the app
           <li>
              spring.datasource.username : Db UserName(for the cloud it has been mentioned on the email)
