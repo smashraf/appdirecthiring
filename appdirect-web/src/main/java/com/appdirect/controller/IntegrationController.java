@@ -40,6 +40,7 @@ public class IntegrationController {
 	public AppdirectAPIResponse processEvent(HttpServletRequest request, HttpServletResponse response,
 											 @RequestParam(value = "eventUrl", required = false) String eventUrl) {
 
+
 		logger.info("evetURL from appdirect: " + eventUrl);
 
 		String jsonResp = null;
@@ -48,6 +49,7 @@ public class IntegrationController {
 			//send a signed oauth request to get json payload from appdirect server
 			jsonResp = signedOauthClient.signAndGetObject(eventUrl);
 			logger.debug("JSON response for the event with eventURL: " + eventUrl + " JSON:" + jsonResp);
+			logger.info("JSON response for the event with eventURL: " + eventUrl + " JSON:" + jsonResp);
 		} catch (OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException
 				| IOException e) {
 			logger.debug("Error occured while processing event with event URL: " + eventUrl + " Error Details :"
@@ -55,7 +57,7 @@ public class IntegrationController {
 			return new AppdirectAPIResponse(false, "Error occured while fetch event details from appDirect server for event URL:"
 					+ eventUrl + " Error message: " + e.getMessage(), ErrorCode.CONFIGURATION_ERROR);
 		}
-			logger.info("Sending JSON response to handlers for further processing.");
+			logger.info("Sending JSON response to handlers for further processing :"+jsonResp);
 		return appDirectIntegrationService.handleEvent(gson.fromJson(jsonResp, EventInfo.class));
 		}
 

@@ -4,6 +4,7 @@ import com.appdirect.appdirectobjects.AppdirectAPIResponse;
 import com.appdirect.appdirectobjects.EventInfo;
 import com.appdirect.appdirectobjects.type.ErrorCode;
 import com.appdirect.entity.UserAccount;
+import com.appdirect.exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,14 @@ public class CancelSubscription implements EventHandler {
 
 		String accountId = eventInfo.getPayload().getAccount().getAccountIdentifier();
 		logger.info("Processing subscription cancel event for account :" + accountId);
-		UserAccount account = userAccountService.getAccountById(accountId);
-		
-		if(null==account){
+		UserAccount account = null;
+		try {
+			account = userAccountService.getAccountById(accountId);
+		} catch (ServiceException e) {
+			logger.debug("Account does not exists for account ID: " + accountId
+			);
 			return new AppdirectAPIResponse(false, "Account doesnot exists :" + accountId, ErrorCode.ACCOUNT_NOT_FOUND);
 		}
-
 		userAccountService.deleteAccount(account);
 		return new AppdirectAPIResponse(true, "Subscription cancelled successfully for account :" + accountId, null, accountId);
 	}

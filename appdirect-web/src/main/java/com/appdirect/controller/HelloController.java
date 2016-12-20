@@ -30,7 +30,6 @@ public class HelloController {
     @ResponseBody
     public String greeting() {
         logger.info("hey man it works");
-        System.out.println("hey man it works");
         clientSecret.getConsumerKey();
         testservice.testservice(5);
         return "hello World";

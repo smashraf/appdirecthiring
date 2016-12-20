@@ -5,6 +5,7 @@ import com.appdirect.appdirectobjects.EventInfo;
 import com.appdirect.appdirectobjects.type.ErrorCode;
 import com.appdirect.entity.AppdirectUser;
 import com.appdirect.entity.UserAccount;
+import com.appdirect.exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -29,7 +30,12 @@ public class UserAssignment implements EventHandler {
 
 		String accountId = eventInfo.getPayload().getAccount().getAccountIdentifier();
 		logger.info("Processing user assignment  for account: " + accountId);
-		UserAccount account = userAccountService.getAccountById(accountId);
+		UserAccount account = null;
+		try {
+			account = userAccountService.getAccountById(accountId);
+		} catch (ServiceException e) {
+			return new AppdirectAPIResponse(false, "Account doesnot exists :" + accountId, ErrorCode.ACCOUNT_NOT_FOUND);
+		}
 		List<AppdirectUser> users = account.getAppdirectUser();
 
 		String userUuid = eventInfo.getPayload().getUser().getUuid();
@@ -44,7 +50,6 @@ public class UserAssignment implements EventHandler {
 		logger.info("Adding new user for account : " + accountId);
 		AppdirectUser user = new AppdirectUser();
 		user.setAdmin(false);
-		BeanUtils.copyProperties(user, eventInfo.getPayload().getUser());
 		user.setUuid(eventInfo.getPayload().getUser().getUuid());
 		user.setFirstName(eventInfo.getPayload().getUser().getFirstName());
 		user.setLastName(eventInfo.getPayload().getUser().getLastName());
